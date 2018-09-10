@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My_single_page</string>
+    <string name="Name">Input your name</string>
+    <string name="Enter">Name confirm</string>
+</resources>
