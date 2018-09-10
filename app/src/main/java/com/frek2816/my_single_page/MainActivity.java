@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public void NameConfirm(View view){
         String text = editText.getText().toString();
         textView.setText("Hello" + " " + text);
+        editText.setText("");
     }
 
     public void Clear(View view){
