@@ -1,4 +1,4 @@
-package com.frek2816.my_single_page;
+package com.frek2816.my_single_page_app_input_validation;
 
 import org.junit.Test;
 

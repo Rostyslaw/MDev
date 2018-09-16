@@ -1,4 +1,4 @@
-package com.frek2816.my_single_page;
+package com.frek2816.my_single_page_app_input_validation;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.frek2816.my_single_page", appContext.getPackageName());
+        assertEquals("com.frek2816.my_single_page_app_input_validation", appContext.getPackageName());
     }
 }

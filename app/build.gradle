@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.frek2816.my_single_page"
+        applicationId "com.frek2816.my_single_page_app_input_validation"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
