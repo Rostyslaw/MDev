@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.frek2816.my_single_page">
+    package="com.frek2816.my_single_page_app_input_validation">
 
     <application
         android:allowBackup="true"
