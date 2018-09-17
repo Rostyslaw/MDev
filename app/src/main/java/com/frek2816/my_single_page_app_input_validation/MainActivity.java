@@ -18,8 +18,12 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     EditText passwordConfirm;
     TextView status;
-
-
+    public static final Pattern PASSCPATTERN = Pattern.compile("[0-9!@#$%^&*a-zA-Z]{6,}");
+    public static final Pattern PASSPATTERN = Pattern.compile("[0-9!@#$%^&*a-zA-Z]{6,}");
+    public static final Pattern MOBILEPATTERN = Pattern.compile("\\+\\d{12}");
+    public static final Pattern EMAILPATTERN = Pattern.compile("([a-z0-9]+)(\\.[a-z0-9]+)*@([a-z0-9]+)(\\.[a-z0-9]+)+$");
+    public static final Pattern LOSTNAMEPATTERN = Pattern.compile("[a-zA-Zа-яА-Я]+$");
+    public static final Pattern FIRSTNAMEPATTERN = Pattern.compile("[a-zA-Zа-яА-Я]+$");
 
 
     @Override
@@ -78,8 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     void EditFirstNameProcessed(){
         String firstName = editFirstName.getText().toString();
-        Pattern p = Pattern.compile("[a-zA-Zа-яА-Я]+$");
-        Matcher m = p.matcher(firstName);
+        Matcher m = FIRSTNAMEPATTERN.matcher(firstName);
 
         if(!m.matches()){
             editFirstName.setError("Ім'я не може містити розділові знаки та цифри");
@@ -90,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     void EditLostNameProcessed(){
         String lostName = editLostName.getText().toString();
-        Pattern p = Pattern.compile("[a-zA-Zа-яА-Я]+$");
-        Matcher m = p.matcher(lostName);
+        Matcher m = LOSTNAMEPATTERN.matcher(lostName);
 
         if(!m.matches()){
             editLostName.setError("Прізвище не може містити розділові знаки та цифри");
@@ -102,8 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     void EditEmailProcessed(){
         String email_ = email.getText().toString();
-        Pattern p = Pattern.compile("([a-z0-9]+)(\\.[a-z0-9]+)*@([a-z0-9]+)(\\.[a-z0-9]+)+$");
-        Matcher m = p.matcher(email_);
+        Matcher m = EMAILPATTERN.matcher(email_);
 
         if(!m.matches()){
             email.setError("Заповніть поле та перевірте правильність вводу");
@@ -115,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
     void EditMobileNumberProcessed(){
 
         String mobile = mobileNumber.getText().toString();
-        Pattern p = Pattern.compile("\\+\\d{12}");
-        Matcher m = p.matcher(mobile);
+        Matcher m = MOBILEPATTERN.matcher(mobile);
 
         if(!m.matches()){
             mobileNumber.setError("Заповніть поле та перевірте правильність вводу");
@@ -128,8 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     void EditPasswordProcessed(){
         String pass = password.getText().toString();
-        Pattern p = Pattern.compile("[0-9!@#$%^&*a-zA-Z]{6,}");
-        Matcher m = p.matcher(pass);
+        Matcher m = PASSPATTERN.matcher(pass);
 
         if(!m.matches()){
             password.setError("Пароль має складатись більш ніж з 6 символів та не містити розділових знаків");
@@ -141,8 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     void EditConfirmPasswordProcessed(){
         String passC = passwordConfirm.getText().toString();
-        Pattern p = Pattern.compile("[0-9!@#$%^&*a-zA-Z]{6,}");
-        Matcher m = p.matcher(passC);
+        Matcher m = PASSCPATTERN.matcher(passC);
 
         if(!m.matches()){
             passwordConfirm.setError("Пароль має складатись більш ніж з 6 символів та не містити розділових знаків");
