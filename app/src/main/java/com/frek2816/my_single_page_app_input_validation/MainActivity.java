@@ -1,9 +1,13 @@
 package com.frek2816.my_single_page_app_input_validation;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -18,12 +22,14 @@ public class MainActivity extends AppCompatActivity {
     EditText password;
     EditText passwordConfirm;
     TextView status;
+    Button viewList;
     public static final Pattern PASSCPATTERN = Pattern.compile("[0-9!@#$%^&*a-zA-Z]{6,}");
     public static final Pattern PASSPATTERN = Pattern.compile("[0-9!@#$%^&*a-zA-Z]{6,}");
     public static final Pattern MOBILEPATTERN = Pattern.compile("\\+\\d{12}");
     public static final Pattern EMAILPATTERN = Pattern.compile("([a-z0-9]+)(\\.[a-z0-9]+)*@([a-z0-9]+)(\\.[a-z0-9]+)+$");
     public static final Pattern LOSTNAMEPATTERN = Pattern.compile("[a-zA-Zа-яА-Я]+$");
     public static final Pattern FIRSTNAMEPATTERN = Pattern.compile("[a-zA-Zа-яА-Я]+$");
+
 
 
     @Override
@@ -37,6 +43,14 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.editText5);
         passwordConfirm = findViewById(R.id.editText6);
         status = findViewById(R.id.textView);
+        viewList = findViewById(R.id.button2);
+        /*viewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Users.class);
+                startActivity(intent);
+            }
+        });*/
 
     }
 
@@ -44,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     @SuppressLint("SetTextI18n")
+
+    public void ViewList(View view) {
+        //Перехід на наступну Activity
+        Intent intent = new Intent(MainActivity.this, Users.class);
+        startActivity(intent);
+    }
 
     public void Send_text(View view) {
         errorEnterText = 0;
@@ -60,14 +80,19 @@ public class MainActivity extends AppCompatActivity {
             String passC = passwordConfirm.getText().toString();
 
             if(!pass.equals(passC)){
-                password.setError("Паролі не співпадають");
+                password.setError(getString(R.string.dontTrue));
                 password.setText("");
-                passwordConfirm.setError("Паролі не співпадають");
+                passwordConfirm.setError(getString(R.string.dontTrue));
                 passwordConfirm.setText("");
             }else {
 
                 status.setText("Data sent");
-            }
+                SharedPreferences mPrefs = getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                String phone = mobileNumber.getText().toString();
+                prefsEditor.putString(phone, readVariables());
+                prefsEditor.commit();
+                }
 
         }else {
             if(errorEnterText == 1){
@@ -79,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     void EditFirstNameProcessed(){
         String firstName = editFirstName.getText().toString();
@@ -148,6 +174,15 @@ public class MainActivity extends AppCompatActivity {
             errorEnterText += 1;
         }
 
+    }
+
+
+    private String readVariables() {
+        String firstName = editFirstName.getText().toString();
+        String lastName = editLostName.getText().toString();
+        String phone = mobileNumber.getText().toString();
+        String userInfo = firstName + "\n" + lastName + "\n" + phone;
+        return userInfo;
     }
 }
 
