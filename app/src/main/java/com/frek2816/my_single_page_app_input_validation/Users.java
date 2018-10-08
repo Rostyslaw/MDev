@@ -10,7 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +21,10 @@ public class Users extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        Toolbar toolbar = /*(Toolbar)*/ findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FloatingActionButton fab = findViewById(R.id.fab);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,16 +34,15 @@ public class Users extends AppCompatActivity {
         });
 
         ViewList();
-
     }
 
     void ViewList(){
         list = new ArrayList<>();
-
-        ListView lvMain = /*(ListView)*/ findViewById(R.id.lvMain);
-
-        SharedPreferences mPrefs = getSharedPreferences("Prefs",
-                Context.MODE_PRIVATE);
+        SharedPreferences mPrefs;
+        ArrayAdapter<String> adapter;
+        ListView lvMain;
+        lvMain = findViewById(R.id.lvMain);
+        mPrefs = getSharedPreferences("Prefs", Context.MODE_PRIVATE);
         Map<String, ?> map = mPrefs.getAll();
 
         for(Map.Entry<String,?> entry : map.entrySet()){
@@ -52,9 +50,7 @@ public class Users extends AppCompatActivity {
             list.add(user);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, list);
-
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         lvMain.setAdapter(adapter);
     }
 }

@@ -9,4 +9,12 @@
     <string name="textview">TextView</string>
     <string name="title_activity_users">Users</string>
     <string name="dontTrue">Паролі не співпадають</string>
+    <string name="passError">Пароль має складатись більш ніж з 6 символів та не містити розділових знаків</string>
+    <string name="errorNumber">Заповніть поле та перевірте правильність вводу</string>
+    <string name="errorEmail">Заповніть поле та перевірте правильність вводу</string>
+    <string name="errorLastname">Прізвище не може містити розділові знаки та цифри</string>
+    <string name="errorName">Ім\'я не може містити розділові знаки та цифри</string>
+    <string name="wrongField">Wrong field</string>
+    <string name="wrongFields">Wrong fields</string>
+    <string name="dataSent">Data sent</string>
 </resources>

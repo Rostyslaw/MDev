@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.regex.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     public static final Pattern LOSTNAMEPATTERN = Pattern.compile("[a-zA-Zа-яА-Я]+$");
     public static final Pattern FIRSTNAMEPATTERN = Pattern.compile("[a-zA-Zа-яА-Я]+$");
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,21 +41,9 @@ public class MainActivity extends AppCompatActivity {
         passwordConfirm = findViewById(R.id.editText6);
         status = findViewById(R.id.textView);
         viewList = findViewById(R.id.button2);
-        /*viewList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Users.class);
-                startActivity(intent);
-            }
-        });*/
-
     }
 
-
-
-
     @SuppressLint("SetTextI18n")
-
     public void ViewList(View view) {
         //Перехід на наступну Activity
         Intent intent = new Intent(MainActivity.this, Users.class);
@@ -84,25 +69,21 @@ public class MainActivity extends AppCompatActivity {
                 password.setText("");
                 passwordConfirm.setError(getString(R.string.dontTrue));
                 passwordConfirm.setText("");
-            }else {
-
-                status.setText("Data sent");
+            } else {
+                status.setText(R.string.dataSent);
                 SharedPreferences mPrefs = getSharedPreferences("Prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
                 String phone = mobileNumber.getText().toString();
                 prefsEditor.putString(phone, readVariables());
                 prefsEditor.commit();
-                }
-
+            }
         }else {
             if(errorEnterText == 1){
-                status.setText("Wrong field");
-            }else if(errorEnterText > 1){
-                status.setText("Wrong fields");
+                status.setText(R.string.wrongField);
+            } else if(errorEnterText > 1){
+                status.setText(R.string.wrongFields);
             }
         }
-
-
     }
 
 
@@ -111,10 +92,9 @@ public class MainActivity extends AppCompatActivity {
         Matcher m = FIRSTNAMEPATTERN.matcher(firstName);
 
         if(!m.matches()){
-            editFirstName.setError("Ім'я не може містити розділові знаки та цифри");
+            editFirstName.setError(getString(R.string.errorName));
             errorEnterText += 1;
         }
-
     }
 
     void EditLostNameProcessed(){
@@ -122,10 +102,9 @@ public class MainActivity extends AppCompatActivity {
         Matcher m = LOSTNAMEPATTERN.matcher(lostName);
 
         if(!m.matches()){
-            editLostName.setError("Прізвище не може містити розділові знаки та цифри");
+            editLostName.setError(getString(R.string.errorLastname));
             errorEnterText += 1;
         }
-
     }
 
     void EditEmailProcessed(){
@@ -133,23 +112,19 @@ public class MainActivity extends AppCompatActivity {
         Matcher m = EMAILPATTERN.matcher(email_);
 
         if(!m.matches()){
-            email.setError("Заповніть поле та перевірте правильність вводу");
+            email.setError(getString(R.string.errorEmail));
             errorEnterText += 1;
         }
-
     }
 
     void EditMobileNumberProcessed(){
-
         String mobile = mobileNumber.getText().toString();
         Matcher m = MOBILEPATTERN.matcher(mobile);
 
         if(!m.matches()){
-            mobileNumber.setError("Заповніть поле та перевірте правильність вводу");
+            mobileNumber.setError(getString(R.string.errorNumber));
             errorEnterText += 1;
         }
-
-
     }
 
     void EditPasswordProcessed(){
@@ -157,11 +132,10 @@ public class MainActivity extends AppCompatActivity {
         Matcher m = PASSPATTERN.matcher(pass);
 
         if(!m.matches()){
-            password.setError("Пароль має складатись більш ніж з 6 символів та не містити розділових знаків");
+            password.setError(getString(R.string.passError));
             password.setText("");
             errorEnterText += 1;
         }
-
     }
 
     void EditConfirmPasswordProcessed(){
@@ -169,20 +143,18 @@ public class MainActivity extends AppCompatActivity {
         Matcher m = PASSCPATTERN.matcher(passC);
 
         if(!m.matches()){
-            passwordConfirm.setError("Пароль має складатись більш ніж з 6 символів та не містити розділових знаків");
+            passwordConfirm.setError(getString(R.string.passError));
             passwordConfirm.setText("");
             errorEnterText += 1;
         }
-
     }
-
 
     private String readVariables() {
         String firstName = editFirstName.getText().toString();
         String lastName = editLostName.getText().toString();
         String phone = mobileNumber.getText().toString();
         String userInfo = firstName + "\n" + lastName + "\n" + phone;
+
         return userInfo;
     }
 }
-
