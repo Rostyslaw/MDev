@@ -1,4 +1,4 @@
-package com.frek2816.androidlab;
+package com.frek2816.androidlab.Entity;
 
 import com.google.gson.annotations.SerializedName;
 

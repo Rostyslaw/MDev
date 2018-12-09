@@ -27,20 +27,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        ManageFragments manageFragments = new ManageFragments(this);
+        ApplicationEx.getInstance().setFragmentManager(manageFragments);
+        ApplicationEx.getInstance().getFragmentManager().setFragment(new ImageListFragment());
 
-        setFragment(new ImageListFragment());
     }
 
-    @OnClick(R.id.favourites_button)
+    /*@OnClick(R.id.favourites_button)
     protected void onFavouritesButtonClick(View view){
         setFragment(new ImageFavouritesFragment());
-    }
+    }*/
 
-    public void setFragment(final Fragment fragment) {
-        getSupportFragmentManager().
-                beginTransaction()
-                .replace(R.id.frame_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
 }

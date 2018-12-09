@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.frek2816.androidlab.Entity.ImageItem;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -58,11 +59,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImageDetailsFragment imageDetailsFragment = new ImageDetailsFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString(DETAILS, new Gson().toJson(imageItemList.get(position)));
-                imageDetailsFragment.setArguments(bundle);
-                ((MainActivity) view.getContext()).setFragment(imageDetailsFragment);
+                ApplicationEx.getInstance().getFragmentManager().
+                        setArguments(imageItemList.get(position));
             }
         });
     }
