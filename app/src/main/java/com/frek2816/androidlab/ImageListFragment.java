@@ -2,7 +2,6 @@ package com.frek2816.androidlab;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,19 +12,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.frek2816.androidlab.Entity.ImageItem;
+import com.frek2816.androidlab.Presenters.ListPresenterImpl;
+import com.frek2816.androidlab.Presenters.PresenterInterfaces;
+import com.frek2816.androidlab.Views.ViewInterfaces;
+
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class ImageListFragment extends Fragment {
+public class ImageListFragment extends Fragment implements ViewInterfaces.ListImagesView {
     private List<ImageItem> imageList;
     private ImageAdapter imageAdapter;
+    private PresenterInterfaces.ListPresenter listPresenter;
 
     @BindView(R.id.no_data_image)
     protected ImageView noDataImage;
@@ -43,58 +43,34 @@ public class ImageListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         ButterKnife.bind(this, view);
         noDataImage.setVisibility(View.INVISIBLE);
+        listPresenter = new ListPresenterImpl(this);
+        initializeAdapter();
 
-        setRecyclerAdapter();
-        refreshPageContent();
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        setJsonToRecyclerAdapter();
+        listPresenter.getData();
     }
 
-    private void refreshPageContent() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                setJsonToRecyclerAdapter();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-    }
-
-    private void setRecyclerAdapter() {
-        imageList = new ArrayList<>();
+    private void initializeAdapter() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        imageAdapter = new ImageAdapter(getContext(), imageList);
+    }
+
+    @Override
+    public void setData(List<ImageItem> imageItems) {
+        imageAdapter= new ImageAdapter(getActivity(), imageItems);
         recyclerView.setAdapter(imageAdapter);
     }
 
-    private void setJsonToRecyclerAdapter() {
-        GetImageDataService service = RetrofitInstance
-                .getRetrofitInstance().create(GetImageDataService.class);
-        Call<List<ImageItem>> call = service.getImageList();
-
-        call.enqueue(new Callback<List<ImageItem>>() {
-            @Override
-            public void onResponse(Call<List<ImageItem>> call, Response<List<ImageItem>> response) {
-                assert response.body() != null;
-                imageList = response.body();
-                imageAdapter.setImageList(imageList);
-                noDataImage.setVisibility(View.INVISIBLE);
-            }
-
-            @Override
-            public void onFailure(Call<List<ImageItem>> call, Throwable t) {
-                noDataImage.setVisibility(View.VISIBLE);
-                Toast.makeText(getActivity(),
-                        getString(R.string.message)
-                                + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+        Toast.makeText(getActivity(), "Unsa"
+                + throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
+
 
 }
