@@ -1,6 +1,4 @@
-package com.frek2816.androidlab.Retrofit;
-
-import com.frek2816.androidlab.Entity.ImageItem;
+package com.frek2816.androidlab;
 
 import java.util.List;
 
