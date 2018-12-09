@@ -7,35 +7,48 @@
     card_view:cardElevation="3dp"
     card_view:cardUseCompatPadding="true">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/json_author"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="90dp"
+            android:layout_height="130dp"
+            android:contentDescription="@string/image" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:padding="3dp"/>
+            android:layout_alignParentTop="@id/image"
+            android:layout_toEndOf="@+id/image"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-        <!-- Text Notice Description -->
-        <TextView
-            android:id="@+id/json_format"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="3dp" />
+            <TextView
+                android:id="@+id/json_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textStyle="bold" />
 
-        <!-- Text Notice FilePath -->
-        <TextView
-            android:id="@+id/json_file_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="3dp"/>
+            <!-- Text Notice Description -->
+            <TextView
+                android:id="@+id/json_format"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp" />
 
-    </LinearLayout>
+            <!-- Text Notice FilePath -->
+            <TextView
+                android:id="@+id/json_file_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>
