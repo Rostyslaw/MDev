@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Lorem Picsum</string>
+    <string name="app_name">android.lab</string>
     <string name="action_settings">Settings</string>
-    <string name="image">image</string>
-    <string name="message">Something went wrong…Error message:</string>
 </resources>
